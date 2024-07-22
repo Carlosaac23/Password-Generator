@@ -138,6 +138,7 @@ body {
   position: absolute;
 }
 .checkbox-wrapper-30 .checkbox input {
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-tap-highlight-color: transparent;
