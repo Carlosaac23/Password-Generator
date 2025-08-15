@@ -27,6 +27,7 @@ function generatePassword() {
 
   if (characters === '') {
     passwordInput.value = '';
+    showMessage('Please select at least one password setting');
     return;
   }
 
@@ -44,16 +45,34 @@ function generatePassword() {
 
 function copyPassword() {
   const passwordInput = document.getElementById('password');
-  const coppyButton = document.getElementById('copy');
+
+  if (passwordInput.value === '') {
+    showMessage('No password to copy');
+    return;
+  }
 
   passwordInput.disabled = false;
   // Enable the input to select its value
   passwordInput.select();
   document.execCommand('copy');
-  passwordInput.disabled = true; // Disable the input again
+  passwordInput.disabled = true;
+  showMessage('¡Password copied!');
+}
 
-  coppyButton.textContent = 'Copied';
+function showMessage(message) {
+  const textContainer = document.querySelector('.copy-text');
+
+  // Remove existing message if any
+  const existingMsg = document.querySelector('.copied-msg');
+  if (existingMsg) {
+    return;
+  }
+
+  const copiedMsg = document.createElement('p');
+  copiedMsg.classList.add('copied-msg');
+  copiedMsg.textContent = message;
+  textContainer.appendChild(copiedMsg);
   setTimeout(() => {
-    coppyButton.textContent = 'Copy';
-  }, 2000);
+    copiedMsg.remove();
+  }, 2500);
 }
